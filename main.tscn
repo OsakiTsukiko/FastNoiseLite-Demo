@@ -1,0 +1,149 @@
+[gd_scene load_steps=3 format=3 uid="uid://gnqhad2vd7ub"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_7cmie"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbsnv"]
+bg_color = Color(0.662745, 0.419608, 0.337255, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7cmie")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="Panel/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dbsnv")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/CenterContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/CenterContainer/HBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="GridContainer" parent="Panel/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+columns = 2
+
+[node name="SeedLabel" type="Label" parent="Panel/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "SEED: "
+
+[node name="SeedINP" type="LineEdit" parent="Panel/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "SEED"
+
+[node name="TypeLabel" type="Label" parent="Panel/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "TYPE: "
+
+[node name="TypeBTN" type="OptionButton" parent="Panel/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 6
+selected = 0
+popup/item_0/text = "SIMPLEX"
+popup/item_0/id = 0
+popup/item_1/text = "SIMPLEX SMOOTH"
+popup/item_1/id = 1
+popup/item_2/text = "CELLULAR"
+popup/item_2/id = 2
+popup/item_3/text = "PERLIN"
+popup/item_3/id = 3
+popup/item_4/text = "VALUE"
+popup/item_4/id = 4
+popup/item_5/text = "VALUE CUBE"
+popup/item_5/id = 5
+
+[node name="GainLabel" type="Label" parent="Panel/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "GAIN: "
+
+[node name="GainINP" type="SpinBox" parent="Panel/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+step = 0.01
+
+[node name="OctavesLabel" type="Label" parent="Panel/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "OCTAVES: "
+
+[node name="OctavesINP" type="SpinBox" parent="Panel/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+step = 0.01
+
+[node name="UNFOCUS" type="Button" parent="Panel/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+text = "UNFOCUS"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -36.0
+offset_right = 240.0
+offset_bottom = -10.0
+grow_vertical = 0
+text = "USE WASD TO MOVE AROUND"
+vertical_alignment = 2
+
+[node name="Author" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -137.0
+offset_top = -36.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "BY OSAKITSUKIKO"
+vertical_alignment = 2
+
+[connection signal="text_changed" from="Panel/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/SeedINP" to="." method="_on_seed_inp_text_changed"]
+[connection signal="item_selected" from="Panel/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/TypeBTN" to="." method="_on_type_btn_item_selected"]
+[connection signal="value_changed" from="Panel/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/GainINP" to="." method="_on_gain_inp_value_changed"]
+[connection signal="value_changed" from="Panel/CenterContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/OctavesINP" to="." method="_on_octaves_inp_value_changed"]
